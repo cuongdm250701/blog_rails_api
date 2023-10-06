@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    rescue_from CanCan::AccessDenied, with: :render_forbidden_response
     include Response
     include Auth
     before_action :process_token
@@ -18,5 +19,9 @@ class ApplicationController < ActionController::API
 
     def render_unprocessable_entity_response error, status: :unprocessable_entity
       render json: error.record.errors, status: status
+    end
+
+    def render_forbidden_response exception
+      json_response({ message: exception }, :forbidden)
     end
 end

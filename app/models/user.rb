@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  # attr_accessor :login
+  has_many :posts
 
-
+  enum role: { admin: 0, customer: 1 }
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

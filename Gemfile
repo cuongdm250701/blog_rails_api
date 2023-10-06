@@ -12,6 +12,8 @@ gem 'puma', '~> 4.1'
 
 gem 'jbuilder', '~> 2.5'
 gem 'jwt'
+gem 'cancancan', '~> 3.3.0'
+gem 'ransack', '~> 3.1.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production

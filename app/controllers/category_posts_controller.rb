@@ -1,9 +1,10 @@
 class CategoryPostsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_category_posts, only: [:update, :destroy, :show]
+    authorize_resource
 
     def index
-        @category_posts = CategoryPost.all
+        @category_posts = CategoryPost.filter_by_title params[:title]
         json_response({ message: "Successfully !", data: @category_posts })
     end
 
@@ -37,7 +38,7 @@ class CategoryPostsController < ApplicationController
     private
 
     def category_posts_params
-        params.permit(:title)
+        params.require(:category_posts).permit(:title)
     end
 
     def set_category_posts
