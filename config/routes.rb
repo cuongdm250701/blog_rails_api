@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: 'ping#pong'
   get "ping" => 'ping#pong'
   get 'my_posts' => 'posts#my_posts'
+  get 'post_favorites' => 'post_favorites#index'
   devise_for :users,
              controllers: {
               sessions: 'users/sessions',
@@ -14,5 +15,7 @@ Rails.application.routes.draw do
               passwords: 'users/passwords'
             }
   draw(:category_posts)
+  draw(:posts)
+  draw(:follows)
   
 end

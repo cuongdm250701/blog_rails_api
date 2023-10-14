@@ -1,0 +1,1 @@
+resources :follows, only: [:create, :destroy, :index]

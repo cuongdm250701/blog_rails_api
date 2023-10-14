@@ -1,5 +1,10 @@
 class User < ApplicationRecord
   has_many :posts
+  has_many :comments
+  has_many :post_favorites
+  has_many :be_followed, :class_name => "Follow", :foreign_key => "followed_user_id"
+  has_many :follower_by, :class_name => "Follow", :foreign_key => "follower_by_user_id"
+
 
   enum role: { admin: 0, customer: 1 }
   devise :database_authenticatable, :registerable,

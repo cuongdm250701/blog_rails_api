@@ -9,7 +9,11 @@ class CategoryPostsController < ApplicationController
     end
 
     def create
-        @category_posts = CategoryPost.create!(category_posts_params)
+        params_create_category_post = category_posts_create_params
+        params_create_category_post[:posts_attributes].each do |post|
+            post[:user_id] = current_user.id
+        end if params_create_category_post.key?("posts_attributes")
+        @category_posts = CategoryPost.create!(params_create_category_post)
         json_response({ data: @category_posts }, :created)
     end
 
@@ -41,7 +45,12 @@ class CategoryPostsController < ApplicationController
         params.require(:category_posts).permit(:title)
     end
 
+    def category_posts_create_params
+        params.require(:category_posts).permit(:title, :posts_attributes => [:title, :content])
+    end
+
     def set_category_posts
         @category_posts = CategoryPost.find_by(id: params[:id])
     end
+
 end
