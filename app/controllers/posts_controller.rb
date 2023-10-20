@@ -14,6 +14,11 @@ class PostsController < ApplicationController
         @post = @category_post.posts.new(post_params)
         @post.user = current_user
         if @post.save
+            SaveNotifycationsWorker.perform_async(
+                @post.title, 
+                @post.content, 
+                current_user.id
+            )
             json_response({ message: "Successfully !", data: @post })
         else
             error_response

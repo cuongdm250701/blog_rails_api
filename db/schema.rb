@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_13_161611) do
+ActiveRecord::Schema.define(version: 2023_10_17_154837) do
 
   create_table "category_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
@@ -33,8 +33,21 @@ ActiveRecord::Schema.define(version: 2023_10_13_161611) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "followed_user_id", null: false
     t.bigint "follower_by_user_id", null: false
+    t.boolean "is_receive_notifycation", default: false
     t.index ["followed_user_id"], name: "index_follows_on_followed_user_id"
     t.index ["follower_by_user_id"], name: "index_follows_on_follower_by_user_id"
+  end
+
+  create_table "notifycations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_read", default: false
+    t.bigint "created_by_id", null: false
+    t.bigint "receiver_id", null: false
+    t.index ["created_by_id"], name: "index_notifycations_on_created_by_id"
+    t.index ["receiver_id"], name: "index_notifycations_on_receiver_id"
   end
 
   create_table "post_favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -78,6 +91,8 @@ ActiveRecord::Schema.define(version: 2023_10_13_161611) do
   add_foreign_key "comments", "users"
   add_foreign_key "follows", "users", column: "followed_user_id"
   add_foreign_key "follows", "users", column: "follower_by_user_id"
+  add_foreign_key "notifycations", "users", column: "created_by_id"
+  add_foreign_key "notifycations", "users", column: "receiver_id"
   add_foreign_key "post_favorites", "posts"
   add_foreign_key "post_favorites", "users"
   add_foreign_key "posts", "category_posts"

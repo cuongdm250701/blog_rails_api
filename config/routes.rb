@@ -1,5 +1,6 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
-
+  mount Sidekiq::Web => "/sidekiq"
   def draw(routes_name)
     instance_eval(File.read(Rails.root.join("config/routes/#{routes_name}.rb")))
   end
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
               registrations: 'users/registrations',
               passwords: 'users/passwords'
             }
+            
   draw(:category_posts)
   draw(:posts)
   draw(:follows)

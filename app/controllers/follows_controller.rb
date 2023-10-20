@@ -31,6 +31,15 @@ class FollowsController < ApplicationController
         end
     end
 
+    def receive_notifycation
+        @follower = Follow.find_by(followed_user_id: params[:user_id], follower_by_user_id: current_user.id)
+        if @follower
+            json_response({ message: "Successfully" }) if @follower.update(is_receive_notifycation: params[:is_receive])
+        else
+            error_response
+        end
+    end
+
     private 
 
     def check_exist_user

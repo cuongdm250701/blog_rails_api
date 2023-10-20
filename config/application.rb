@@ -23,6 +23,9 @@ module BlogRailsApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    # config.session_store :cookie_store, key: '_interslice_session'
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use config.session_store, config.session_options
     # config.paths["config/routes"] = Dir[Rails.root.join('config/routes/*.rb')]
 
     # Settings in config/environments/* take precedence over those specified here.

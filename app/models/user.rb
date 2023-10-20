@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :post_favorites
   has_many :be_followed, :class_name => "Follow", :foreign_key => "followed_user_id"
   has_many :follower_by, :class_name => "Follow", :foreign_key => "follower_by_user_id"
+  has_many :created_by, :class_name => "Notifycation", :foreign_key => "created_by_id"
+  has_many :receiver, :class_name => "Notifycation", :foreign_key => "receiver_id"
 
 
   enum role: { admin: 0, customer: 1 }
