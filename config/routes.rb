@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   draw(:category_posts)
   draw(:posts)
   draw(:follows)
+  draw(:notifycations)
   
 end

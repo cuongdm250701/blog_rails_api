@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_17_154837) do
+ActiveRecord::Schema.define(version: 2023_10_23_161954) do
 
   create_table "category_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2023_10_17_154837) do
     t.bigint "followed_user_id", null: false
     t.bigint "follower_by_user_id", null: false
     t.boolean "is_receive_notifycation", default: false
+    t.boolean "is_receive_email", default: false
     t.index ["followed_user_id"], name: "index_follows_on_followed_user_id"
     t.index ["follower_by_user_id"], name: "index_follows_on_follower_by_user_id"
   end

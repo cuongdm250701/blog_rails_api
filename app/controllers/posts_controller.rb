@@ -65,6 +65,10 @@ class PostsController < ApplicationController
         end
     end
 
+    def statistical_posts
+        @statistical_posts = Post.
+    end
+
     private
 
     def post_params

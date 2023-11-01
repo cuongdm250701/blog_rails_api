@@ -17,4 +17,9 @@ class Post < ApplicationRecord
 
     scope :filter_post_by_id, -> post_id { where id: post_id }
     scope :filter_post_approved, -> state { where status: state }
+
+    # scope :statistical_posts, -> { 
+    #     left_outer_joins(:category_posts)
+    #     .count("posts.id") 
+    # }
 end
